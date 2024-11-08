@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+          name="viewport"
+          content="initial-scale=1.0, user-scalable=no, width=device-width"
+        />
+        <title>HELLO, AMAP!</title>
+        <style>
+          html,
+          body,
+          #container {
+            width: 100%;
+            height: 100%;
+          }
+        </style>
+      </head>
+      <body>
+        <div id="container"></div>
+    
+</head> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载高德地图</title>
+
+    <!-- 1. 新建容器，存放地图 -->
+     <style>
+        container{
+            width: 100%;
+            height: 100%;
+        }
+     </style>
+     <!-- 2. 添加高德API资源 -->
+     <script type="text/javascript">
+        window._AMapSecurityConfig = {
+          securityJsCode: "973e553273abc9039d72cffcb4bb1a52",
+        };
+      </script>
+      <script src="https://webapi.amap.com/loader.js"></script>
+      <script src="https://webapi.amap.com/maps?v=2.0&key=4f7521f5c464810c1441ae08bdc2f7db"></script>
+  <body>
+     <!-- 创建容器 -->
+     <div id="container"></div> 
+     <!-- 判断API是否加载成功 -->
+      <!-- <script>
+         console.log(AMap)
+      </script> -->
+     <!-- 创建地图对象 -->
+     <script>
+     const map = new AMap.Map('container',{
+             center: [104.872, 27.423], 
+             zoom: 16,
+             viewMode: '2D',
+             pitch:60,
+         })
+         AMap.plugin("AMap.Driving", function () {
+  var driving = new AMap.Driving({
+    policy: 0, //驾车路线规划策略，0是速度优先的策略
+  });
+  var startLngLat = [104.872, 27.423]; //起始点坐标
+  var endLngLat = [104.596, 27.563]; //终点坐标
+  var opts = {
+    waypoints: [104.692,27.362], //途经点参数，最多支持传入16个途经点
+  };
+  driving.search(startLngLat, endLngLat, opts, function (status, result) {
+    //status：complete 表示查询成功，no_data 为查询无结果，error 代表查询错误
+    //查询成功时，result 即为对应的驾车导航信息
+  });
+});    
+AMap.plugin("AMap.DragRoute", function () {
+  //path 是驾车导航的起、途径和终点，最多支持16个途经点
+  var path = [];
+  path.push([104.872, 27.423]);
+  path.push([104.596, 27.563]);
+  path.push([104.692, 27.362]);
+  var route = new AMap.DragRoute(map, path, 0);
+  //查询导航路径并开启拖拽导航
+  route.search();
+});   
+     </script>   
+     
+
+<body>
+    
+</body>
+</html>
